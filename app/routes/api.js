@@ -1,10 +1,12 @@
-var Survey = require('../models/survey');
 var config = require('../../config');
 var secretKey = config.secretKey;
+var pg = require('pg');
+
+var conString = "pg://postgres:postgres@localhost:5432/postgres";
 
 
 
-module.exports = function (app, express, io) {
+module.exports = function (app, express) {
 
     var api = express.Router();
 
@@ -12,19 +14,45 @@ module.exports = function (app, express, io) {
 //---------------------- Survey functions ---------------------------
 
 
-    api.route('/surveys')
+    api.route('/assets')
 
         .get(function (req, res) {
-            Survey.find({creator: req.decoded.id}, function (err, surveys) {
-                if (err) {
-                    res.send(err);
-                    return;
-                }
-                res.json(surveys);
-            });
-        })
+            var results = [];
 
-        .post(function (req, res) {
+            // Grab data from http request
+            var data = {text: req.body.text, complete: false};
+
+            // Get a Postgres client from the connection pool
+            pg.connect(conString, function(err, client, done) {
+                // Handle connection errors
+                if(err) {
+                    done();
+                    console.log(err);
+                    return res.status(500).json({ success: false, data: err});
+                }
+
+                // SQL Query > Insert Data
+                //client.query("INSERT INTO items(text, complete) values($1, $2)", [data.text, data.complete]);
+
+                // SQL Query > Select Data
+                var query = client.query("SELECT * FROM assets");
+
+                // Stream results back one row at a time
+                query.on('row', function(row) {
+                    results.push(row);
+                });
+
+                // After all data is returned, close connection and return results
+                query.on('end', function() {
+                    done();
+                    return res.json(results);
+                });
+
+
+            });
+        });
+
+      /*  .post(function (req, res) {
             var survey = new Survey({
                 creator: req.decoded.id,
                 Title: req.body.Title,
@@ -42,11 +70,11 @@ module.exports = function (app, express, io) {
                     message: 'Survey has been created!'
                 });
             });
-        });
+        });*/
 
 //---------------------- Survey by ID functions ---------------------------
 
-
+/*
     api.route('/surveys/:survey_id')
 
         .get(function (req, res) {
@@ -83,7 +111,7 @@ module.exports = function (app, express, io) {
                 if (err)
                     res.send(err);
             });
-        });
+        });*/
 
 
 //-------------------------------------------------------------------------

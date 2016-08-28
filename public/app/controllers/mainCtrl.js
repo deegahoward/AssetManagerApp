@@ -3,13 +3,22 @@
 
 //doLogin/doLogout methods from https://www.udemy.com/ realtime-meanstack/
 
-var mainApp = angular.module('mainCtrl', ['surveyService', 'ui.router']);
+var mainApp = angular.module('mainCtrl', ['mainService', 'ui.router']);
 
 
-mainApp.controller('MainController', function ($rootScope, $location, $scope, $state) {
+mainApp.controller('MainController', function ($rootScope, $location, $scope, $state, Assets) {
 
-    $scope.title = "AssetManager";
+    $scope.title = "Asset Manager";
 
+
+    Assets.all()
+        .success(function (data){
+
+            console.log(data);
+
+            $scope.Assets = data;
+
+        })
 
 });
 

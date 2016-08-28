@@ -14,13 +14,13 @@ angular.module('appRoutes', ['ui.router'])
             templateUrl: 'app/views/pages/home.html'
 
         })
-        .state('login', {
+        .state('view', {
             url: '/login',
-            templateUrl: 'app/views/pages/login.html'
+            templateUrl: 'app/views/pages/viewAssets.html'
         })
-        .state('signup', {
+        .state('add', {
             url: '/signup',
-            templateUrl: 'app/views/pages/signup.html'
+            templateUrl: 'app/views/pages/addAsset.html'
         });
 
 

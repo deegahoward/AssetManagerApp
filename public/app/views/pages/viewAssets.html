@@ -1,0 +1,29 @@
+<div class="container" ng-controller="MainController">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+
+            <h1>View Assets</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="asset in Assets">
+                    <th scope="row">1</th>
+                    <td>{{asset.name}}</td>
+                    <td>{{asset.type}}</td>
+                    <td>{{asset.quantity}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,15 +1,15 @@
-angular.module('surveyService', [])
+angular.module('mainService', [])
 
-    .factory('Survey', function ($http) {
+    .factory('Assets', function ($http) {
 
-        var surveyFactory = {};
+        var assetFactory = {};
 
-        surveyFactory.all = function () {
-            return $http.get('/api/surveys');
+        assetFactory.all = function () {
+            return $http.get('/api/assets');
 
         };
 
-        surveyFactory.create = function (survey) {
+        /*surveyFactory.create = function (survey) {
             return $http.post('/api/surveys', survey);
 
         };
@@ -30,8 +30,8 @@ angular.module('surveyService', [])
 
             return $http.delete('/api/surveys/' + id);
 
-        };
+        };*/
 
-        return surveyFactory;
+        return assetFactory;
 
     });
