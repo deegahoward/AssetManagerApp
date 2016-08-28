@@ -1,0 +1,19 @@
+body {
+    background-color: white;
+    font-size: 18px;
+}
+
+h1, h2 {
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 200;
+    padding-bottom: 2em;
+}
+
+li {
+    display: block !important;
+    margin-bottom: 10px !important;
+}
+
+
+
