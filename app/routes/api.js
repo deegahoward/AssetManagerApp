@@ -19,9 +19,6 @@ module.exports = function (app, express) {
         .get(function (req, res) {
             var results = [];
 
-            // Grab data from http request
-            var data = {text: req.body.text, complete: false};
-
             // Get a Postgres client from the connection pool
             pg.connect(conString, function(err, client, done) {
                 // Handle connection errors
@@ -31,10 +28,6 @@ module.exports = function (app, express) {
                     return res.status(500).json({ success: false, data: err});
                 }
 
-                // SQL Query > Insert Data
-                //client.query("INSERT INTO items(text, complete) values($1, $2)", [data.text, data.complete]);
-
-                // SQL Query > Select Data
                 var query = client.query("SELECT * FROM assets");
 
                 // Stream results back one row at a time
@@ -50,27 +43,62 @@ module.exports = function (app, express) {
 
 
             });
+        })
+
+        .post(function (req, res) {
+
+            console.log(req.body);
+
+            // Grab data from http request
+            var data = {
+                name: req.body.name,
+                type: req.body.type,
+                quantity: req.body.quantity
+            };
+
+            // Get a Postgres client from the connection pool
+            pg.connect(conString, function(err, client, done) {
+                // Handle connection errors
+                if(err) {
+                    done();
+                    console.log(err);
+                    return res.status(500).json({ success: false, data: err});
+                }
+
+                // SQL Query > Insert Data
+                var query = client.query("INSERT INTO assets(name, type, quantity) values($1, $2, $3)", [data.name, data.type, data.quantity]);
+
+                // After all data is returned, close connection and return results
+                query.on('end', function() {
+                    done();
+                    return res.json(data);
+                });
+
+            });
+        })
+
+        .delete(function (req, res) {
+
+            pg.connect(conString, function(err, client, done) {
+                // Handle connection errors
+                if (err) {
+                    done();
+                    console.log(err);
+                    return res.status(500).json({success: false, data: err});
+                }
+
+                var query = client.query("Delete from assets Where id =" + 2);
+
+
+                query.on('end', function (data) {
+                    done();
+                    return res.json(data);
+                });
+
+            })
+
         });
 
-      /*  .post(function (req, res) {
-            var survey = new Survey({
-                creator: req.decoded.id,
-                Title: req.body.Title,
-                Questions: req.body.Questions,
-                Answers: req.body.Answers
-            });
-
-            survey.save(function (err) {
-                if (err) {
-                    res.send(err);
-                    return;
-                }
-                res.json({
-                    success: true,
-                    message: 'Survey has been created!'
-                });
-            });
-        });*/
 
 //---------------------- Survey by ID functions ---------------------------
 

@@ -11,14 +11,16 @@
                     <th>Name</th>
                     <th>Type</th>
                     <th>Quantity</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="asset in Assets">
-                    <th scope="row">1</th>
+                <tr ng-repeat="asset in Assets track by $index">
+                    <th scope="row">{{$index}}</th>
                     <td>{{asset.name}}</td>
                     <td>{{asset.type}}</td>
                     <td>{{asset.quantity}}</td>
+                    <td><span class="glyphicon glyphicon-remove-circle"></span></td>
                 </tr>
                 </tbody>
             </table>

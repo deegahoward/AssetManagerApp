@@ -9,10 +9,19 @@ angular.module('mainService', [])
 
         };
 
-        /*surveyFactory.create = function (survey) {
-            return $http.post('/api/surveys', survey);
+        assetFactory.create = function (asset) {
+            return $http.post('/api/assets', asset);
 
         };
+
+        assetFactory.delete = function (id) {
+            console.log(id);
+
+            return $http.delete('/api/assets/' + id);
+
+        };
+
+        /*
 
         surveyFactory.update = function (survey) {
             var id = survey._id;
@@ -25,12 +34,7 @@ angular.module('mainService', [])
             return $http.get('/api/surveys/' + id);
         };
 
-        surveyFactory.delete = function (id) {
-            console.log(id);
-
-            return $http.delete('/api/surveys/' + id);
-
-        };*/
+       */
 
         return assetFactory;
 
