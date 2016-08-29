@@ -6,19 +6,15 @@ angular.module('mainService', [])
 
         assetFactory.all = function () {
             return $http.get('/api/assets');
-
         };
 
         assetFactory.create = function (asset) {
             return $http.post('/api/assets', asset);
-
         };
 
         assetFactory.delete = function (id) {
             console.log(id);
-
             return $http.delete('/api/assets/' + id);
-
         };
 
         assetFactory.update = function (asset) {

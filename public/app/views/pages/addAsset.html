@@ -3,11 +3,13 @@
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
 				<h1>Add New Asset:</h1>
 				<form class="form" ng-submit="addAsset()">
-					Name: <input type="text" name="name" class="form-control" ng-model="main.newAsset.name">
+					Name: <input type="text" name="name" class="form-control" ng-model="main.newAsset.name" ng-click="assetCreated = false">
 					Type: <input type="text" name="type" class="form-control" ng-model="main.newAsset.type">
                     Quantity: <input type="number" name="quantity" class="form-control" ng-model="main.newAsset.quantity">
                     <button type="submit" class="btn btn-default">Add Asset</button>
-				</form>
+                    <p ng-show="assetCreated" class="success pull-right">Asset successfully created</p>
+                    <p ng-show="errorMessage" class="error pull-right">Error: Asset not created</p>
+                </form>
 			</div>
 		</div>
 </div>

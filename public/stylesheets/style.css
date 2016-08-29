@@ -109,5 +109,15 @@ a:hover {
     padding: 5%;
 }
 
+.success {
+    color: darkgreen;
+    margin: 5px;
+}
+
+.error {
+    color: red;
+    margin: 5px;
+}
+
 
 
