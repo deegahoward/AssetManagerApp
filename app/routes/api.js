@@ -75,7 +75,6 @@ module.exports = function (app, express) {
 
     api.route('/assets/:asset_id')
 
-
         .delete(function (req, res) {
 
             var id = req.params.asset_id;
@@ -99,9 +98,7 @@ module.exports = function (app, express) {
 
         })
 
-
         .put(function (req, res) {
-
 
             var id = req.params.asset_id;
 

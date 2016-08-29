@@ -1,5 +1,3 @@
-
-
 var mainApp = angular.module('mainCtrl', ['mainService', 'ui.router']);
 
 
@@ -30,7 +28,7 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
 
         $scope.sortType = selectedSort;
 
-        if($scope.sortReverse == true){
+        if ($scope.sortReverse == true) {
 
             $scope.sortReverse = false;
         }
@@ -51,6 +49,8 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
                 vm.message = response.data.message;
                 console.log(response);
                 $scope.assetCreated = true;
+                $scope.newAssetForm.$setPristine();
+                $scope.newAssetForm.$setUntouched();
 
             })
 
@@ -58,13 +58,17 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
 
     $scope.deleteAsset = function (id, index) {
 
-        console.log(id);
         Assets.delete(id)
 
-            .success(function () {
-                $scope.Assets.splice(index, 1);
-            })
+            .then(function () {
 
+                index = _.findLastIndex($scope.Assets, {id: id});
+
+                console.log(index);
+
+                $scope.Assets.splice(index, 1);
+
+            })
     };
 
     $scope.editAsset = function (asset) {
@@ -85,14 +89,10 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
 
         $scope.disableEditor(asset);
         Assets.update(asset)
-        .success(function (data) {
+            .then(function (response) {
 
-                console.log(data);
+                console.log(response);
 
-            })
-
-            .error(function(data){
-                console.log(data);
             })
     };
 

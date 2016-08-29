@@ -1,3 +1,6 @@
+
+//script to create database with dummy data
+
 var pg = require("pg");
 
 var conString = "pg://postgres:postgres@localhost:5432/postgres";
@@ -8,7 +11,7 @@ client.connect();
 
 client.query("DROP TABLE assets");
 
-client.query("CREATE TABLE IF NOT EXISTS assets(name varchar(64) NOT NULL, type varchar(64) NOT NULL, quantity int NOT NULL)");
+client.query("CREATE TABLE IF NOT EXISTS assets(id SERIAL UNIQUE, name varchar(64) NOT NULL, type varchar(64) NOT NULL, quantity int NOT NULL)");
 
 //dummy data
 

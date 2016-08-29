@@ -1,9 +1,5 @@
 angular.module('appRoutes', ['ui.router'])
 
-
-    //routing for Main App
-
-
 .config(function ($stateProvider, $locationProvider) {
 
 
