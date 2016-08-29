@@ -63,8 +63,14 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
         asset.edit = false;
     };
 
-    $scope.save = function() {
-        $scope.disableEditor();
+    $scope.save = function(asset) {
+        Assets.update(asset)
+            .success(function (data){
+                $scope.disableEditor(asset);
+                console.log(data);
+
+            })
+
     };
 
 

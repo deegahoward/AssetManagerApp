@@ -21,20 +21,11 @@ angular.module('mainService', [])
 
         };
 
-        /*
-
-        surveyFactory.update = function (survey) {
-            var id = survey._id;
-            console.log(survey);
-            return $http.put('/api/surveys/' + id, survey);
+        assetFactory.update = function (asset) {
+            var id = asset.id;
+            console.log(asset);
+            return $http.put('/api/assets/' + id, asset);
         };
-
-        surveyFactory.getOne = function (id) {
-
-            return $http.get('/api/surveys/' + id);
-        };
-
-       */
 
         return assetFactory;
 
