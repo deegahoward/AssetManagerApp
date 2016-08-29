@@ -31,10 +31,6 @@ a:hover {
 }
 
 
-input[type=text]{
-    margin: 20px;
-}
-
 .navbar-default {
     background-color: grey;
 }
@@ -107,6 +103,10 @@ input[type=text]{
 }
 .orange-circle-link-greater-than {
     font-size: 1em;
+}
+
+.row-padded {
+    padding: 5%;
 }
 
 
