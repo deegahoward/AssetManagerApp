@@ -11,12 +11,23 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
 
     var vm = this;
 
+    $scope.sortType     = 'name';
+    $scope.sortReverse  = false;
+    $scope.editorEnabled = false;
+
 
     Assets.all()
         .success(function (data) {
             console.log(data);
             $scope.Assets = data;
         });
+
+
+    $scope.changeSort = function(selectedSort){
+
+        $scope.sortType = selectedSort;
+
+    };
 
 
     $scope.addAsset = function () {
@@ -31,11 +42,30 @@ mainApp.controller('MainController', function ($rootScope, $location, $scope, $s
         })
     };
 
-    $scope.deleteAsset = function(id){
+    $scope.deleteAsset = function(id, index){
 
-        Asset.delete(id);
+        console.log(id);
+        Assets.delete(id)
+            .success(function(){
 
-    }
+                $scope.Assets.splice(index, 1);
+
+            })
+    };
+
+    $scope.editAsset = function(asset) {
+        console.log(asset);
+        asset.edit = true;
+        console.log(asset.edit);
+    };
+
+    $scope.disableEditor = function(asset) {
+        asset.edit = false;
+    };
+
+    $scope.save = function() {
+        $scope.disableEditor();
+    };
 
 
 });

@@ -75,9 +75,18 @@ module.exports = function (app, express) {
                 });
 
             });
-        })
+        });
+
+
+//---------------------- Asset by ID functions ---------------------------
+
+
+    api.route('/assets/:asset_id')
+
 
         .delete(function (req, res) {
+
+            var id = req.params.asset_id;
 
             pg.connect(conString, function(err, client, done) {
                 // Handle connection errors
@@ -87,7 +96,7 @@ module.exports = function (app, express) {
                     return res.status(500).json({success: false, data: err});
                 }
 
-                var query = client.query("Delete from assets Where id =" + 2);
+                var query = client.query("Delete from assets Where id =" + id);
 
 
                 query.on('end', function (data) {
@@ -100,19 +109,8 @@ module.exports = function (app, express) {
         });
 
 
-//---------------------- Survey by ID functions ---------------------------
 
-/*
-    api.route('/surveys/:survey_id')
-
-        .get(function (req, res) {
-            Survey.findById(req.params.survey_id, function (err, survey) {
-                if (err) {
-                    res.send(err);
-                }
-                res.json(survey);
-            });
-        })
+        /*
 
         .put(function (req, res) {
             Survey.findById(req.params.survey_id, function (err, survey) {

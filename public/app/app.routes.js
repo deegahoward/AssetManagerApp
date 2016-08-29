@@ -15,11 +15,11 @@ angular.module('appRoutes', ['ui.router'])
 
         })
         .state('view', {
-            url: '/login',
+            url: '/view',
             templateUrl: 'app/views/pages/viewAssets.html'
         })
         .state('add', {
-            url: '/signup',
+            url: '/add',
             templateUrl: 'app/views/pages/addAsset.html'
         });
 
