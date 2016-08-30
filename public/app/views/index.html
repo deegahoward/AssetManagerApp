@@ -23,7 +23,7 @@
     <!-- Controllers -->
     <script type="text/javascript" src="app/controllers/mainCtrl.js"></script>
 
-    <!-- Directives -->
+    <!-- State routing and App config -->
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript"
@@ -33,12 +33,14 @@
 
 <body ng-controller="MainController as main">
 
+<!--navigation-->
+
 <header>
     <div class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="col-sm-3">
-                <span class="glyphicon glyphicon-briefcase" ui-sref="home"></span>
+                    <span class="glyphicon glyphicon-briefcase" ui-sref="home"></span>
                 </div>
                 <div class="col-sm-3">
                     <h3><a ui-sref="home">{{title}}</a></h3>
@@ -60,6 +62,7 @@
     </div>
 </header>
 
+<!--Angular ui-router states will be shown within this container -->
 
 <main class="container">
 

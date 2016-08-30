@@ -1,18 +1,12 @@
 <div class="container" ng-controller="MainController">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-
             <h1>View Assets</h1>
-
             <div class="row-padded">
-
                 <label><span>Filter by name/type:</span></label>
                 <input type="text" class="form-control-sm" ng-model="filterType">
-
             </div>
-
             <div class="row-padded">
-
                 <table class="table">
                     <thead>
                     <tr>
@@ -24,6 +18,9 @@
                     </tr>
                     </thead>
                     <tbody>
+
+                    <!--shows all assets - either text or text input depending on editing -->
+
                     <tr ng-repeat="asset in Assets | filter: filterType | orderBy:sortType:sortReverse track by $index">
                         <td>
                             <p ng-hide="asset.edit">{{asset.name}}</p>

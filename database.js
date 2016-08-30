@@ -1,5 +1,5 @@
 
-//script to create database with dummy data
+//------------------------ script to create database with dummy data -------------------------------
 
 var pg = require("pg");
 
@@ -13,7 +13,7 @@ client.query("DROP TABLE assets");
 
 client.query("CREATE TABLE IF NOT EXISTS assets(id SERIAL UNIQUE, name varchar(64) NOT NULL, type varchar(64) NOT NULL, quantity int NOT NULL)");
 
-//dummy data
+//--------- dummy data ----------
 
 var assetList = [
     {
@@ -59,12 +59,16 @@ var assetList = [
 
 ];
 
+//-------- adding dummy data to db -----------
+
 assetList.forEach(function(asset){
 
     console.log(asset.name);
     client.query("INSERT INTO assets(name, type, quantity) values($1, $2, $3)", [asset.name, asset.type, asset.quantity]);
 
 });
+
+//-------- checking methods -------------
 
 
 var query = client.query("SELECT name, type, quantity FROM assets ORDER BY name");

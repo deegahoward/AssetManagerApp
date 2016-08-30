@@ -10,10 +10,13 @@ module.exports = function (app, express) {
     var api = express.Router();
 
 
-//---------------------- Survey functions ---------------------------
+//------------------------- Asset functions --------------------------------
 
 
     api.route('/assets')
+
+        //getting all assets from db
+
 
         .get(function (req, res) {
             var results = [];
@@ -40,9 +43,9 @@ module.exports = function (app, express) {
             });
         })
 
-        .post(function (req, res) {
+        //posting new asset to db
 
-            console.log(req.body);
+        .post(function (req, res) {
 
             var data = {
                 name: req.body.name,
@@ -70,10 +73,12 @@ module.exports = function (app, express) {
         });
 
 
-//---------------------- Asset by ID functions ---------------------------
+//---------------------------- Asset by ID functions -----------------------------
 
 
     api.route('/assets/:asset_id')
+
+        //deleting asset from db
 
         .delete(function (req, res) {
 
@@ -98,6 +103,8 @@ module.exports = function (app, express) {
 
         })
 
+        //editing asset in db
+
         .put(function (req, res) {
 
             var id = req.params.asset_id;
@@ -109,19 +116,19 @@ module.exports = function (app, express) {
                 quantity: req.body.quantity
             };
 
-            pg.connect(conString, function(err, client, done) {
+            pg.connect(conString, function (err, client, done) {
 
-                if(err) {
+                if (err) {
                     done();
                     console.log(err);
-                    return res.status(500).send(json({ success: false, data: err}));
+                    return res.status(500).send(json({success: false, data: err}));
                 }
 
                 client.query("UPDATE assets SET name=($1), type=($2), quantity=($3) WHERE id=($4)",
                     [data.name, data.type, data.quantity, id]);
 
 
-                query.on('end', function(data) {
+                query.on('end', function (data) {
                     done();
                     return res.json(data);
                 });
